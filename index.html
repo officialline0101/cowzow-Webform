@@ -2665,14 +2665,15 @@ function copySummaryForUser() {
         let selectedoptiTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
-            'ベビーケア・育児相談 45分': 45,
-            'マタニティ整体 45分': 45,
-            '産後整体 45分': 45,
-            'おっぱいマッサージ 45分': 45,
-            '産後ピラティス 45分': 45,
-            '母子ケア 90分': 45,
-            'ファミリーケア 135分': 45,
-            '整体 45分': 45
+            'ジュエリー（宝石）貴金属': 30,
+            'ブランドバック': 30,
+            'ブランド品': 30,
+            'ブランド腕時計': 30,
+            '金券、商品券類': 15,
+            'お酒': 30,
+            'スマートフォン': 30,
+            '電動工具': 30,
+            'その他': 30
         };
 
         let selectedMenuTime = 0;
@@ -3543,7 +3544,7 @@ function applyPreviousSelection() {
         }
 
         // ★GASのWebアプリURL（必ず /exec を使う）
-        const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzCeAntOBELD0hzc6tg_z4W1XzMNHo4oo6YUFTwl09vPRi66uPuvniJ8QWi57TF_J4q/exec';
+        const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxXn8dzI7UMNpNuIOIBMUtu0cZKRx4Z_QPwcBAP4vyQGorudwuXQTWMKI1dsj8UEvM/exec';
 
         /* ▼▼ 追加：サーバと同じ合言葉（簡易署名の鍵） ▼▼
            ※公開ページに置くと閲覧者も読めます。実運用では中継サーバ等で秘匿がベター。 */
@@ -3724,7 +3725,7 @@ const payload = {
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbyMCpwPdMBLFe3VETd_2vY9MQAhvCJLWehDMtOGYTsbf5Y0OkapnazmB1FMBJN4i-YK/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycbw-tSXZ_15Dn2PS27hhFVs2n-TLQ3O1qhoh_h4LBM5RBX0aTu-kyrWG7tgLvQuN75tRSg/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {
