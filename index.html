@@ -1945,106 +1945,6 @@
             --radius: 16px;
         }
 
-        /* 画像エリア（黒線を削除） */
-        .treatment-image {
-            position: relative;
-            width: 100%;
-            height: auto;
-            margin: 0px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            /* border: 1.5px solid var(--line); ←削除 */
-            box-shadow: 0 1px 0 rgba(0, 0, 0, .06);
-        }
-
-        .treatment-image img {
-            width: 100%;
-            display: none;
-            border-radius: 0;
-        }
-
-        .treatment-image {
-            display: none !important;
-        }
-
-        /* 詳細・料金セクション */
-        .treatment-description,
-        .treatment-price,
-        .treatment-basic {
-            position: relative;
-            margin-top: 20px;
-            padding: 18px 0;
-            background: #fff;
-            border-top: 2.5px solid var(--line);
-            border-bottom: 0;
-            border-left: none;
-            border-right: none;
-            border-radius: 0;
-            box-shadow: none;
-            line-height: 1.6;
-            color: #222;
-            font-size: 12px;
-            text-align: left;
-            width: 100%;
-            max-width: none;
-            box-sizing: border-box;
-        }
-
-        /* 見出しラベル */
-        .treatment-description::before,
-        .treatment-price::before,
-        .treatment-basic::before {
-            content: "";
-            position: absolute;
-            top: -18px;
-            left: 14px;
-            padding: 4px 12px;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: .06em;
-            color: var(--ink);
-            background: #fff;
-            border: 1.5px solid var(--line);
-            border-radius: 999px;
-        }
-
-        .treatment-description::before {
-            content: "詳細";
-        }
-
-        .treatment-price::before {
-            content: "診察料";
-        }
-
-        /* 🆕 基本料金ラベル */
-        .treatment-basic::before {
-            content: "基本料金";
-        }
-
-        /* 強調 */
-        .treatment-price strong,
-        .treatment-basic strong {
-            font-size: 16px;
-            font-weight: 900;
-        }
-
-        .treatment-price span,
-        .treatment-basic span {
-            color: var(--ink-muted);
-        }
-
-        @media (min-width: 720px) {
-            .treatment-title {
-                font-size: 26px;
-            }
-
-            .treatment-price strong,
-            .treatment-basic strong {
-                font-size: 26px;
-            }
-        }
-
         /* 重複文言を非表示 */
         .treatment-price>span:first-child {
             display: none;
@@ -2403,6 +2303,104 @@
         font-size: 14px;
     }
 }
+
+/***** ▼ 点数入力エリア（#treatment-text 内）専用デザイン ▼ *****/
+
+#treatment-text {
+  margin: 8px 0 14px;
+  padding: 12px 14px 14px;
+  background: #fdfbf0;              /* 少し黄色がかったカード風 */
+  border: 1px solid #e3ddaa;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  text-align: left;
+}
+
+/* 全体ラッパー */
+#treatment-text .treatment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 「何点あるか？」のタイトル */
+#treatment-text .treatment-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 2px;
+}
+
+/* タイトルの左に小さなラベルバッジ */
+#treatment-text .treatment-title::before {
+  content: "点数";
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  border-radius: 999px;
+  background: #005ea6;
+  color: #fff;
+}
+
+/* セレクト or 数値入力の部分 */
+#treatment-text .treatment-description {
+  margin: 0;
+}
+
+#treatment-text .treatment-description select,
+#treatment-text .treatment-description input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #555555;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+/* number の上下ボタンを消してスッキリさせる */
+#treatment-text .treatment-description input[type="number"] {
+  -moz-appearance: textfield;
+}
+#treatment-text .treatment-description input[type="number"]::-webkit-inner-spin-button,
+#treatment-text .treatment-description input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 所要時間の表示 */
+#treatment-text .treatment-time {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #555555;
+  text-align: right;
+  font-weight: 600;
+}
+
+#treatment-text .treatment-time::before {
+  content: "⏱ ";
+}
+
+/* スマホ時のちょい調整 */
+@media (max-width: 480px) {
+  #treatment-text {
+    padding: 10px 10px 12px;
+  }
+
+  #treatment-text .treatment-title {
+    font-size: 13px;
+  }
+
+  #treatment-text .treatment-description select,
+  #treatment-text .treatment-description input[type="number"] {
+    font-size: 13px;
+  }
+}
+
     </style>
 </head>
 
@@ -2510,19 +2508,20 @@
 
 <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
 
-        <div class="label" id="course">買取内容をお選びください<span class="required">必須</span></div>
-        <div class="info-text">※買取内容を選択すると空き状況のカレンダーが表示されます</div>
-        <div class="symptoms">
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">ジュエリー（宝石）貴金属</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">ブランドバック</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">ブランド品</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">ブランド腕時計</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">金券、商品券類</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">お酒</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">スマートフォン</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">電動工具</button>
-            <button type="button" onclick="selectSymptom(this)" data-price="15000">その他</button>
-        </div>
+<div class="label" id="course">買取内容をお選びください<span class="required">必須</span></div>
+<div class="info-text">※買取内容を選択すると空き状況のカレンダーが表示されます</div>
+
+<div class="symptoms">
+    <button type="button" onclick="selectSymptom(this, 'menu1')" data-price="0">
+        1点から〜5点
+    </button>
+    <button type="button" onclick="selectSymptom(this, 'menu2')" data-price="0">
+        6点から〜10点
+    </button>
+    <button type="button" onclick="selectSymptom(this, 'menu3')" data-price="0">
+        10点以上
+    </button>
+</div>
 
         <div class="label">希望日時<span class="required">必須</span></div>
         <div class="calendar-container">
@@ -2665,6 +2664,9 @@ function copySummaryForUser() {
         let selectedoptiTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
+            '1点から〜5点': 30,
+            '6点から〜10点': 60,
+            '10点以上': 90,
             'ジュエリー（宝石）貴金属': 30,
             'ブランドバック': 30,
             'ブランド品': 30,
@@ -3235,172 +3237,105 @@ function applyPreviousSelection() {
             toggleEmailCustomVisibility('2');
         });
 
-        function selectSymptom(button, treatmentId) {
-            // 選択された日時をリセット
-            selectedFullDate = '';
+function selectSymptom(button, menuId) {
+    // 選択された日時をリセット
+    selectedFullDate = '';
 
-            // ボタンの選択状態を切り替える
-            button.classList.toggle('active');
+    const treatmentText = document.getElementById('treatment-text');
 
-            // ローカルストレージに保存する配列を取得
-            let selectedSymptoms = JSON.parse(localStorage.getItem('selectedSymptoms') || '[]');
+    // 他のボタンの active を外す
+    document.querySelectorAll('.symptoms button').forEach(btn => {
+        if (btn !== button) btn.classList.remove('active');
+    });
 
-            // 選択した症状をローカルストレージに保存（1つだけ保持）
-            selectedSymptoms = [treatmentId];
-            localStorage.setItem('selectedSymptoms', JSON.stringify(selectedSymptoms));
+    // 今押したボタンをトグル
+    button.classList.toggle('active');
 
-            // 選択されたオプションを取得
-            const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
-            const treatmentText = document.getElementById('treatment-text');
+    // ローカルストレージに保存（前回と同じ予約ボタン向け）
+    let selectedSymptoms = [];
+    if (button.classList.contains('active')) {
+        selectedSymptoms = [menuId];
+    }
+    localStorage.setItem('selectedSymptoms', JSON.stringify(selectedSymptoms));
 
-            if (updatedSelectedButtons.length === 0) {
-                // すべてのボタンの選択が解除された場合、メニュー時間を0にリセット
-                selectedMenuTime = 0;
-                selectedSymptom = null; // 選択されたメニューをリセット
-                menuPrice = 0; // メニュー価格をリセット
-                treatmentText.style.display = 'none';
-                return; // ここで処理を終了
-            } else {
-                // 1つだけ選択状態にする
-                if (updatedSelectedButtons.length > 1) {
-                    updatedSelectedButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active'); // クリックしたボタンだけを選択
-                }
+    // 何も選ばれていない場合はリセットして終了
+    if (!button.classList.contains('active')) {
+        selectedMenuTime = 0;
+        selectedSymptom = [];
+        menuPrice = 0;
+        treatmentText.style.display = 'none';
+        treatmentText.innerHTML = '';
+        fetchAvailability(currentDate);
+        updateDisplayInfo();
+        return;
+    }
 
-                // 選択されたメニューの時間を取得して保存
-                const selectedMenu = button.textContent;
-                selectedMenuTime = menuTimes[selectedMenu] || 0; // メニュー時間を取得して保存
-                selectedSymptom = [selectedMenu]; // 選択されたメニュー名を配列として保存
-                menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
-            }
+    // 選択されたメニュー名
+    const symptomName = button.textContent.trim();
+    selectedSymptom = [symptomName];
 
-            console.log('選択されたメニューの時間:', selectedMenuTime);
+    // 所要時間セット
+    selectedMenuTime = menuTimes[symptomName] || 0;
 
-            // カレンダーを更新するために取得する日付を渡す
-            fetchAvailability(currentDate);
+    // メニュー価格（使わないなら 0 のままでもOK）
+    menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
 
-            function createTreatmentContent(title, imageUrl, description, price, basic, time) {
-                const hasTitle = !!(title && title.trim());
-                const hasImage = !!(imageUrl && imageUrl.trim());
-                const hasDesc = !!(description && description.trim());
-                const hasPrice = !!(price && price.trim());
-                const hasBasic = !!(basic && basic.trim());
-                const hasTime = !!(time && time.trim());
+    // メニューごとの表示内容を作成
+    let inner = `
+        <div class="treatment-container">
+            <div class="treatment-title">何点あるか？</div>
+    `;
 
-                const titleContent = hasTitle ? `<div class="treatment-title">${title}</div>` : '';
-                const imageContent = hasImage ? `
-      <div class="treatment-image">
-        <div class="spinner-overlay"><div class="spinner"></div></div>
-        <img src="${imageUrl}" alt="${hasTitle ? title : 'treatment image'}"
-             onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
-      </div>` : '';
-                const descContent = hasDesc ? `<div class="treatment-description">${description}</div>` : '';
-                const timeContent = hasTime ? `<span>所要時間：</span><strong>${time}</strong><br>` : '';
+    if (menuId === 'menu1') {
+        // 1〜5
+        inner += `
+            <div class="treatment-description">
+                <select id="itemCountSelect" name="itemCount">
+                    <option value="">選択してください</option>
+                    <option value="1">1点</option>
+                    <option value="2">2点</option>
+                    <option value="3">3点</option>
+                    <option value="4">4点</option>
+                    <option value="5">5点</option>
+                </select>
+            </div>
+        `;
+    } else if (menuId === 'menu2') {
+        // 6〜10
+        inner += `
+            <div class="treatment-description">
+                <select id="itemCountSelect" name="itemCount">
+                    <option value="">選択してください</option>
+                    <option value="6">6点</option>
+                    <option value="7">7点</option>
+                    <option value="8">8点</option>
+                    <option value="9">9点</option>
+                    <option value="10">10点</option>
+                </select>
+            </div>
+        `;
+    } else if (menuId === 'menu3') {
+        // 10点以上 → 自由入力（10以上）
+        inner += `
+            <div class="treatment-description">
+                <label for="itemCountInput">点数を入力してください（10点以上）</label>
+                <input type="number" id="itemCountInput" name="itemCount"
+                       min="10" placeholder="10以上の数字を入力してください">
+            </div>
+        `;
+    }
 
-                const priceContent = hasPrice
-                    ? `<div class="treatment-price"><span>価格：</span>${price}</div>`
-                    : '';
+    inner += `</div>`;
+    treatmentText.innerHTML = inner;
 
-                const basicContent = hasBasic
-                    ? `<div class="treatment-basic"><span></span><strong>${basic}</strong></div>`
-                    : '';
+    // 選択したボタンの直後に表示＆見せる
+    button.parentNode.insertBefore(treatmentText, button.nextSibling);
+    treatmentText.style.display = 'block';
 
-                // 出力順序を制御（タイトル→画像→詳細→料金→基本料金）
-                const inner = `${titleContent}${imageContent}${descContent}${priceContent}${basicContent}${timeContent}`.trim();
-                return inner ? `<div class="treatment-container">${inner}</div>` : '';
-            }
-
-            // 呼び出し例（treatmentIdやボタンの条件が揃っている前提）
-            if (treatmentId === 'treatment1') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    'マタニティ整体はお腹の赤ちゃんの心音を確認し、赤ちゃんが元気であることを施術の前後で確認します。<br>胎児の心音の確認をするマタニティ整体は助産院ならではです。<br>安心してご予約下さいませ。<br>整体は痛みを伴わない手技により心地よい時間をお過ごしいただけます。<br>お腹クッションもございますので、楽な姿勢で受けられます。<br><br>ベルトの装着方法や生活のアドバイス、家でできる軽い体操なども指導いたします。<br>病院ではなかなか聞けないお産の相談もお気軽にどうぞ。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥9,360',
-                    ''
-                );
-            } else if (treatmentId === 'treatment2') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '出産後の骨盤は崩壊状態です。<br>早めのケアをお勧めします。<br>全身の調整をいたします。<br>産後何年経過していてもケアいたします。<br><br>産後の体型戻し、出産・育児に伴う腰痛、肩こり、腱鞘炎などにも対応しています。<br>自分へのご褒美にもいかがでしょうか？',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥9,360',
-                    ''
-                );
-            } else if (treatmentId === 'treatment3') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '赤ちゃんのことならお任せください。<br>向き癖、頭の形、反り返り、寝ないなどの相談、寝返りやずりばい、ハイハイがオリジナルで改善方法を知りたい、抱っこの仕方やスリング、おんぶ紐の使い方、授乳に関することまで幅広くお応えいたします。<br>ベビーケアでは、赤ちゃんの体をほぐしたり、遊び方や発達、おもちゃのこともご指導します。<br><br>ベビーケアの対象年齢は、新生児から小学校卒業まで！<br>歩き方や走り方などの運動面で気になること、脚の形や姿勢の問題、噛み合わせ（不正咬合）まで幅広くご相談いただけます。<br>発達障害児のからだのケアも受け付けています。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥9,360',
-                    ''
-                );
-            } else if (treatmentId === 'treatment4') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '助産師が指導する産後ピラティスです。<br>産後の体型戻し、育児疲れの解消に身体を動かしませんか？<br>マットピラティスで軽いエクササイズから始めていきます。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥6,240',
-                    ''
-                );
-            } else if (treatmentId === 'treatment5') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '産後のお母さんの体のメンテナンスと赤ちゃんのケアを両方取り入れたプランです。<br>料金が少しお安くなっています。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥18,400',
-                    ''
-                );
-            } else if (treatmentId === 'treatment6') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '3人分の施術枠です。<br>産後整体と双子ちゃんケア、またはきょうだいのケア<br>など、大人と子ども2人の3人の施術でのご予約はこちらをご利用ください。<br>初回のみ初診料としてひとり2600円を頂戴いたします。<br>※お子様のケアにご夫婦で同席されるだけの場合にはベビーケアでご予約ください。<br><br>施術枠人数：3人分（例：大人1名＋子ども2名 など）',
-                    '初回：初診料 2,600円 × 人数分<br>半年以上あくと：再診料 1,100円 × 人数分<br>1年以上あくと：再診料 2,200円 × 人数分',
-                    '基本料金：￥27,560',
-                    ''
-                );
-            } else if (treatmentId === 'treatment7') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    '妊娠、産後に該当しない女性はこちらからご予約ください。<br>妊娠をご希望の女性もぜひ、ご予約くださいませ。<br><br>中学生や高校生の施術もこちらからどうぞ。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥9,360',
-                    ''
-                );
-            } else if (treatmentId === 'treatment8') {
-                treatmentText.innerHTML = createTreatmentContent(
-                    '',
-                    '',
-                    'おっぱいが硬くなる、つまる。<br>乳腺炎になってしまった。<br>赤ちゃんが上手に飲めない。<br>卒乳ケアにもご利用ください。<br><br>おっぱいの状態をより長く良い状態にキープするため、〔整体〕と〔リンパドレナージ〕と〔おっぱいマッサージ〕を併用したオリジナルのケアです。<br>〔おっぱいマッサージ〕は痛くないと好評です。<br><br>しっかり食べる食事指導とアフターケア、赤ちゃんのことまで対応いたします。',
-                    '初回：初診料 2,600円<br>半年以上あくと：再診料 1,100円<br>1年以上あくと：再診料 2,200円',
-                    '基本料金：￥9,360',
-                    ''
-                );
-            } else {
-                treatmentText.innerHTML = '';
-            }
-
-            // `treatment-text` を選択されたボタンの直後に移動
-            button.parentNode.insertBefore(treatmentText, button.nextSibling);
-
-            // トリートメントテキストを表示
-            treatmentText.style.display = 'block';
-
-            // 選択されたメニューの名前と価格を取得
-            const symptomName = button.textContent;  // ボタンのテキストを取得
-            selectedSymptom = [symptomName];  // 選択されたメニュー名を配列として保存
-            menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
-
-            // 表示を更新
-            updateDisplayInfo();
-        }
+    // カレンダー再取得＋表示更新
+    fetchAvailability(currentDate);
+    updateDisplayInfo();
+}
 
         function selectopti(button) {
             selectedFullDate = '';
@@ -3544,7 +3479,7 @@ function applyPreviousSelection() {
         }
 
         // ★GASのWebアプリURL（必ず /exec を使う）
-        const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzqVFGyLa4X_MbnQPfMhgQqxRp1w2LDGX3NdEd1l0xCb_po4S7ZNMtig26nWdh0nqnF9A/exec';
+        const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzZIszFF-XOjiVOdKDfN33tDsZ_mhevb1RGqXvBfoDCglkiqNRT0_lhe8WqOt506FdONw/exec';
 
         /* ▼▼ 追加：サーバと同じ合言葉（簡易署名の鍵） ▼▼
            ※公開ページに置くと閲覧者も読めます。実運用では中継サーバ等で秘匿がベター。 */
@@ -3598,17 +3533,31 @@ async function submitForm() {
 
   try {
     // ======== ここからはあなたの元の処理（バリデーション～payload作成） ========
-    const formData = {
-      name: document.getElementById('name').value.trim(),
-      namehurigana: (document.getElementById('namehurigana')?.value || '').trim(),
-      phone: document.getElementById('phone').value.trim(),
-      email: (document.getElementById('email').value || '').trim(),
-      selectedMenu: typeof selectedMenu !== 'undefined' ? selectedMenu : '',
-      selectedSymptom: (typeof selectedSymptom !== 'undefined' && selectedSymptom && selectedSymptom.length > 0) ? selectedSymptom : null,
-      optiCount: typeof optiCount !== 'undefined' ? optiCount : '',
-      dates: (typeof selectedFullDate !== 'undefined' && selectedFullDate) ? [selectedFullDate] : null,
-      message: document.getElementById('message').value.trim()
-    };
+const formData = {
+  name: document.getElementById('name').value.trim(),
+  namehurigana: (document.getElementById('namehurigana')?.value || '').trim(),
+  phone: document.getElementById('phone').value.trim(),
+  email: (document.getElementById('email').value || '').trim(),
+  selectedMenu: typeof selectedMenu !== 'undefined' ? selectedMenu : '',
+  selectedSymptom: (typeof selectedSymptom !== 'undefined' && selectedSymptom && selectedSymptom.length > 0) ? selectedSymptom : null,
+  optiCount: typeof optiCount !== 'undefined' ? optiCount : '',
+  dates: (typeof selectedFullDate !== 'undefined' && selectedFullDate) ? [selectedFullDate] : null,
+  message: document.getElementById('message').value.trim()
+};
+
+// ★ここを追加（点数を取得）
+let itemCount = '';
+const itemCountSelect = document.getElementById('itemCountSelect');
+const itemCountInput  = document.getElementById('itemCountInput');
+
+if (itemCountSelect && itemCountSelect.value) {
+    itemCount = itemCountSelect.value;
+}
+if (!itemCount && itemCountInput && itemCountInput.value) {
+    itemCount = itemCountInput.value.trim();
+}
+
+formData.itemCount = itemCount;
 
     if (!formData.name) { alert('お名前を入力してください。'); throw new Error('val'); }
     if (!formData.phone) { alert('電話番号を入力してください。'); throw new Error('val'); }
@@ -3650,14 +3599,14 @@ async function submitForm() {
 
 const payload = {
   name: formData.name,
-  // ★ 追加：氏名（カナ）
   namehurigana: formData.namehurigana,
   phone: formData.phone,
   email: formData.email,
-  // ★ 追加：ご予約について
   selectedMenu: formData.selectedMenu,
   selectedSymptom: formData.selectedSymptom,
   optiCount: formData.optiCount,
+  // ★ここを追加
+  itemCount: formData.itemCount,
   message: formData.message,
   startIso,
   durationMin,
